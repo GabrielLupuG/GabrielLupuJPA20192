@@ -78,6 +78,7 @@ public class College {
     public Set<Student> getStudent() {
         return student;
     }
+    //////////////////////////////////////
 
     public void setStudent(Set<Student> student) {
         this.student = student;
