@@ -15,21 +15,20 @@ public class Module {
     private String codeModule;
 
 
-
-
     @ManyToOne
     private Student student;
+
+
 
     public Module() {
     }
 
-    public Module(String nameModule, int classNumber, String codeModule,  List<Student> students) {
+    public Module(String nameModule, int classNumber, String codeModule, List<Student> students) {
         this.nameModule = nameModule;
         this.classNumber = classNumber;
         this.codeModule = codeModule;
         this.student = (Student) students;
     }
-
 
 
     public int getId() {

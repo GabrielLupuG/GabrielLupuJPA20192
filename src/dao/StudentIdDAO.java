@@ -1,20 +1,20 @@
 package dao;
 
-import entities.Identification;
+import entities.StudentId;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class IdentificationDAO {
+public class StudentIdDAO {
 
     protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unt");
 
-    public void persistIdentification(Identification identification){
+    public void persistStudentId(StudentId studentId){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.persist(identification);
+        entityManager.persist(studentId);
 
         entityManager.getTransaction().commit();
         entityManager.close();

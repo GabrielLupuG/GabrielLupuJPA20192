@@ -18,7 +18,7 @@ public class Student {
     private String phoneNumber;
 
     @OneToOne
-    private Identification identification;
+    private StudentId identification;
 
     @OneToMany
     private List<Module> modules = new ArrayList<>();
@@ -28,14 +28,14 @@ public class Student {
 
     public Student() {}
 
-    public Student(String address, String email, String phoneNumber, Identification identification) {
+    public Student(String address, String email, String phoneNumber, StudentId identification) {
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.identification = identification;
     }
 
-    public Student(String address, String email, String phoneNumber, Identification identification, List<Module> modules) {
+    public Student(String address, String email, String phoneNumber, StudentId identification, List<Module> modules) {
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -79,11 +79,11 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public Identification getIdentification() {
+    public StudentId getIdentification() {
         return identification;
     }
 
-    public void setPassport(Identification identification) {
+    public void setPassport(StudentId identification) {
         this.identification = identification;
     }
 

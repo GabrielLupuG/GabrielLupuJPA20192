@@ -15,23 +15,23 @@ public class College {
 
     private String collegeName;
     private int totNumStudents;
-    private String adress;
+    private String address;
     private int phoneNum;
 
     @ManyToMany
     @JoinTable(
             name="college_student",
-            joinColumns = @JoinColumn(name="student_id"),
-            inverseJoinColumns = @JoinColumn(name="college_id")
+            joinColumns = @JoinColumn(name="college_id"),
+            inverseJoinColumns = @JoinColumn(name="student_id")
     )
     private Set<Student> student = new HashSet<>();
 
     public College() {}
 
-    public College(String collegeName, int totNumStudents, String adress, int phoneNum) {
+    public College(String collegeName, int totNumStudents, String address, int phoneNum) {
         this.collegeName = collegeName;
         this.totNumStudents = totNumStudents;
-        this.adress = adress;
+        this.address = address;
         this.phoneNum = phoneNum;
     }
 
@@ -59,12 +59,12 @@ public class College {
         this.totNumStudents = totNumStudents;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPhoneNum() {

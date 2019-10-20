@@ -3,28 +3,26 @@ package main;
 
 import dao.CollegeDAO;
 
-import dao.IdentificationDAO;
+import dao.StudentIdDAO;
 import dao.ModuleDAO;
 
 import dao.StudentDAO;
 import entities.College;
-import entities.Identification;
+import entities.StudentId;
 import entities.Module;
 import entities.Student;
-
-import java.util.Date;
 
 public class MainActivity {
 
     public MainActivity(){
 
-        IdentificationDAO identificationDAO = new IdentificationDAO();
-        Identification ident = new Identification("Lupu", "Gabriel", "BSC InfoSystem", "C11111");
-        Identification ident2 = new Identification("Oana", "Lupu", "Bs Business", "C22222");
-        identificationDAO.persistIdentification(ident);
-        identificationDAO.persistIdentification(ident2);
+        StudentIdDAO studentIDDAO = new StudentIdDAO();
+        StudentId ident = new StudentId("Lupu", "Gabriel", "BSC InfoSystem", "C11111");
+        StudentId ident2 = new StudentId("Oana", "Lupu", "Bs Business", "C22222");
+        studentIDDAO.persistStudentId(ident);
+        studentIDDAO.persistStudentId(ident2);
 
-        Date date = new Date();
+
         ModuleDAO moduleDAO = new ModuleDAO();
         Module module = new Module("Distributed System", 222, "1A",null);
         Module mod1 = new Module("Business ", 307, "1B",null);
@@ -42,7 +40,7 @@ public class MainActivity {
 
 
         CollegeDAO collegeDAO = new CollegeDAO();
-        College college = new College("DIT", 180, "bolton St", 56666666);
+        College college = new College("DIT", 1800, "bolton St", 5555555);
         College college1 = new College("DCU", 2600, "kevin ST", 666666);
 
         college.addStudent(student);

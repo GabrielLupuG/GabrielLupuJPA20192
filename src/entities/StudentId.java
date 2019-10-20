@@ -5,8 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
-public class Identification {
+public class StudentId {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -16,11 +17,11 @@ public class Identification {
     private String courseName;
     private String studentNumber;
 
-    public Identification(){
+    public StudentId(){
 
     }
 
-    public Identification(String firstName, String lastName, String courseName, String studentNumber) {
+    public StudentId(String firstName, String lastName, String courseName, String studentNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.courseName = courseName;
