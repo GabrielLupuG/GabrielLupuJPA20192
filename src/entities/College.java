@@ -1,9 +1,7 @@
 package entities;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
-
 import java.util.Set;
 
 @Entity
@@ -78,7 +76,6 @@ public class College {
     public Set<Student> getStudent() {
         return student;
     }
-    //////////////////////////////////////
 
     public void setStudent(Set<Student> student) {
         this.student = student;

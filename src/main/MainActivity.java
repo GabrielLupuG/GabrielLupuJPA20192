@@ -2,30 +2,29 @@ package main;
 
 
 import dao.CollegeDAO;
-
-import dao.StudentIdDAO;
 import dao.ModuleDAO;
-
 import dao.StudentDAO;
+import dao.StudentIdDAO;
 import entities.College;
-import entities.StudentId;
 import entities.Module;
 import entities.Student;
+import entities.StudentId;
 
 public class MainActivity {
 
     public MainActivity(){
 
-        StudentIdDAO studentIDDAO = new StudentIdDAO();
+        StudentIdDAO studentIdDAO = new StudentIdDAO();
         StudentId ident = new StudentId("Lupu", "Gabriel", "BSC InfoSystem", "C11111");
         StudentId ident2 = new StudentId("Oana", "Lupu", "Bs Business", "C22222");
-        studentIDDAO.persistStudentId(ident);
-        studentIDDAO.persistStudentId(ident2);
+        studentIdDAO.persistStudentId(ident);
+        studentIdDAO.persistStudentId(ident2);
 
 
         ModuleDAO moduleDAO = new ModuleDAO();
         Module module = new Module("Distributed System", 222, "1A",null);
         Module mod1 = new Module("Business ", 307, "1B",null);
+        //module.addStudentId(studentIdDAO);
         moduleDAO.persistModule(module);
         moduleDAO.persistModule(mod1);
 
@@ -51,7 +50,7 @@ public class MainActivity {
     }
 
 
-    public static void main(String args[]){
+    public static void main(String[] args) {
         new MainActivity();
     }
 }
