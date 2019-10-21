@@ -1,7 +1,6 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Module {
@@ -16,18 +15,18 @@ public class Module {
 
 
     @ManyToOne
-    private Student student;
+    private StudentId studentId;//1
 
 
 
     public Module() {
     }
 
-    public Module(String nameModule, int classNumber, String codeModule, List<Student> students) {
+    public Module(String nameModule, int classNumber, String codeModule, StudentId studentId) {
         this.nameModule = nameModule;
         this.classNumber = classNumber;
         this.codeModule = codeModule;
-        this.student = (Student) students;
+        this.studentId = studentId;
     }
 
 
@@ -63,11 +62,11 @@ public class Module {
         this.codeModule = codeModule;
     }
 
-    public Student getStudent() {
-        return student;
+    public StudentId getStudentId() {
+        return studentId;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudentId(StudentId studentId) {
+        this.studentId = studentId;
     }
 }

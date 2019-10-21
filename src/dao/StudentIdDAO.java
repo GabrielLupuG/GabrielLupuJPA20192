@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 public class StudentIdDAO {
 
+    //creaza conexiune cu persistence.xml
     protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unt");
 
     public void persistStudentId(StudentId studentId){
