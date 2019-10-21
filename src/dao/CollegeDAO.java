@@ -1,6 +1,6 @@
 package dao;
 
-import entities.College;
+import entities.School;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,11 +10,11 @@ public class CollegeDAO {
 
     protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unt");
 
-    public void persistCollege(College college){
+    public void persistCollege(School school) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.persist(college);
+        entityManager.persist(school);
 
         entityManager.getTransaction().commit();
         entityManager.close();

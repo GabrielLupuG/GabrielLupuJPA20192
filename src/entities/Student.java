@@ -1,10 +1,13 @@
 package entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+
+@NamedQueries({
+        @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
+})
 
 @Entity
 public class Student {
@@ -17,33 +20,36 @@ public class Student {
     private String email;
     private String phoneNumber;
 
-    @OneToOne
-    private StudentId studentId;
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private StudentCard studentCard;
 
-    @OneToMany
-    private List<Module> modules = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "student_module",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "module_id")
+    )
+    private Set<Module> modules = new HashSet<>();
 
-    @ManyToMany(mappedBy = "student")
-    private Set<College> colleges = new HashSet<>();
-
-    public Student() {}
-
-    public Student(String address, String email, String phoneNumber, StudentId studentId) {
-        this.address = address;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.studentId = studentId;
+    public Student() {
     }
 
-    public Student(String address, String email, String phoneNumber, StudentId studentId, List<Module> modules) {
+    public Student(String address, String email, String phoneNumber, StudentCard studentCard) {
         this.address = address;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.studentId = studentId;
+        this.studentCard = studentCard;
+    }
+
+    public Student(String address, String email, String phoneNumber, StudentCard studentCard, Set<Module> modules) {
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.studentCard = studentCard;
         this.modules = modules;
     }
 
-    public void addModule(Module module){
+    public void addModule(Module module) {
         modules.add(module);
     }
 
@@ -79,38 +85,33 @@ public class Student {
         this.phoneNumber = phoneNumber;
     }
 
-    public StudentId getStudentId() {
-        return studentId;
+    public StudentCard getStudentCard() {
+        return studentCard;
     }
 
-    public void setStudentId(StudentId studentId) {
-        this.studentId = studentId;
+    public void setStudentCard(StudentCard studentCard) {
+        this.studentCard = studentCard;
     }
 
-    public List<Module> getModules() {
+    public Set<Module> getModules() {
         return modules;
     }
 
-    public void setModules(List<Module> modules) {
+    public void setModules(Set<Module> modules) {
         this.modules = modules;
     }
 
-    public Set<College> getColleges() {
-        return colleges;
-    }
-
-    public void setColleges(Set<College> colleges) {
-        this.colleges = colleges;
-    }
-
-    public void addCollege(College college){
-        colleges.add(college);
-        college.getStudent().add(this);
-    }
-
-    public void add(Student student) {
-    }
-
-    public void remove(Student student) {
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", studentCard=" + studentCard +
+                ", modules=" + modules +
+                '}';
     }
 }
+
+

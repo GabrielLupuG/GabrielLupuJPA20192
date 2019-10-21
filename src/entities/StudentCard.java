@@ -1,13 +1,14 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+@NamedQueries({
+        @NamedQuery(name = "StudentCard.findAll", query = "SELECT s FROM StudentCard s")
+})
 
 
 @Entity
-public class StudentId {
+public class StudentCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,11 +18,10 @@ public class StudentId {
     private String courseName;
     private String studentNumber;
 
-    public StudentId(){
-
+    public StudentCard() {
     }
 
-    public StudentId(String firstName, String lastName, String courseName, String studentNumber) {
+    public StudentCard(String firstName, String lastName, String courseName, String studentNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.courseName = courseName;
@@ -66,5 +66,16 @@ public class StudentId {
 
     public void setStudentNumber(String studentNumber) {
         this.studentNumber = studentNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "\nStudentCard{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", courseName='" + courseName + '\'' +
+                ", studentNumber='" + studentNumber + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Module {
@@ -9,26 +11,25 @@ public class Module {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String nameModule;
-    private int classNumber;
-    private String codeModule;
+    private String moduleName;
+    private String classNumber;
+    private String moduleCode;
 
+    @ManyToMany(mappedBy = "modules")
+    private Set<Student> students = new HashSet<>();
 
     @ManyToOne
-    private StudentId studentId;//1
-
-
+    private School school;
 
     public Module() {
     }
 
-    public Module(String nameModule, int classNumber, String codeModule, StudentId studentId) {
-        this.nameModule = nameModule;
+    public Module(String moduleName, String classNumber, String moduleCode, Set<Student> students) {
+        this.moduleName = moduleName;
         this.classNumber = classNumber;
-        this.codeModule = codeModule;
-        this.studentId = studentId;
+        this.moduleCode = moduleCode;
+        this.students = students;
     }
-
 
     public int getId() {
         return id;
@@ -38,35 +39,46 @@ public class Module {
         this.id = id;
     }
 
-    public String getNameModule() {
-        return nameModule;
+    public String getModuleName() {
+        return moduleName;
     }
 
-    public void setNameModule(String nameModule) {
-        this.nameModule = nameModule;
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
     }
 
-    public int getClassNumber() {
+    public String getClassNumber() {
         return classNumber;
     }
 
-    public void setClassNumber(int classNumber) {
+    public void setClassNumber(String classNumber) {
         this.classNumber = classNumber;
     }
 
-    public String getCodeModule() {
-        return codeModule;
+    public String getModuleCode() {
+        return moduleCode;
     }
 
-    public void setCodeModule(String codeModule) {
-        this.codeModule = codeModule;
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
 
-    public StudentId getStudentId() {
-        return studentId;
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    public void setStudentId(StudentId studentId) {
-        this.studentId = studentId;
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Module{" +
+                "id=" + id +
+                ", moduleName='" + moduleName + '\'' +
+                ", classNumber='" + classNumber + '\'' +
+                ", moduleCode='" + moduleCode + '\'' +
+                ", students=" + students +
+                '}';
     }
 }

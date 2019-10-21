@@ -5,8 +5,7 @@
              version="2.1">
 
 
-
-    <persistence-unit name="unt">
+    <persistence-unit name="linkToMyDb">
 
 
 
