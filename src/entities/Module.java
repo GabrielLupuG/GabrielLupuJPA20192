@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NamedQueries({
+        @NamedQuery(name = "Module.getAll", query = "SELECT m FROM Module m")
+})
+
 @Entity
 public class Module {
 
@@ -15,13 +19,20 @@ public class Module {
     private String classNumber;
     private String moduleCode;
 
-    @ManyToMany(mappedBy = "modules")
-    private Set<Student> students = new HashSet<>();
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "school_id")
     private School school;
 
+    @ManyToMany(mappedBy = "modules", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Student> students = new HashSet<>();
+
     public Module() {
+    }
+
+    public Module(String moduleName, String classNumber, String moduleCode) {
+        this.moduleName = moduleName;
+        this.classNumber = classNumber;
+        this.moduleCode = moduleCode;
     }
 
     public Module(String moduleName, String classNumber, String moduleCode, Set<Student> students) {
@@ -71,9 +82,17 @@ public class Module {
         this.students = students;
     }
 
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
     @Override
     public String toString() {
-        return "Module{" +
+        return "\nModule{" +
                 "id=" + id +
                 ", moduleName='" + moduleName + '\'' +
                 ", classNumber='" + classNumber + '\'' +

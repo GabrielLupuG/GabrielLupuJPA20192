@@ -1,55 +1,68 @@
 package dao;
 
-import entities.StudentCard;
+import entities.School;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class StudentCardDAO {
+public class SchoolDAO {
 
-    //creaza conexiune cu persistence.xml
     protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("linkToMyDb");
 
-    public void persistStudent(StudentCard studentCard) {
+    public void persistSchool(School school) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
-        entityManager.persist(studentCard);
+        entityManager.persist(school);
 
         entityManager.getTransaction().commit();
         entityManager.close();
     }
 
-    public List<StudentCard> getAllStudentCards() {
-        EntityManager em = entityManagerFactory.createEntityManager();
-
-        List<StudentCard> studentCards = (List<StudentCard>) em.createNamedQuery("StudentCard.findAll").getResultList();
-        em.close();
-
-        return studentCards;
-    }
-
-    public void updateStudentCard(StudentCard studentCard) {
+    public School getById(String query, String param1, int param2) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-
-        em.merge(studentCard);
+        School school = (School) em.createNamedQuery(query).setParameter(param1, param2).getSingleResult();
 
         em.getTransaction().commit();
         em.close();
+
+        return school;
     }
 
-    public void deleteStudentCard(StudentCard studentCard) {
+    public List<School> getAllSchools() {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-
-        em.remove(em.merge(studentCard));
+        List<School> schools = (List) em.createNamedQuery("School.getAll").getResultList();
 
         em.getTransaction().commit();
         em.close();
+
+        return schools;
     }
 
+    public void updateStudent(School school) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
 
+        em.merge(school);
+
+        em.getTransaction().commit();
+        em.close();
+
+    }
+
+    public void deleteStudent(School school) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        em.remove(em.merge(school));
+
+        em.getTransaction().commit();
+        em.close();
+
+
+    }
 }

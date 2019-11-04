@@ -5,8 +5,6 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "StudentCard.findAll", query = "SELECT s FROM StudentCard s")
 })
-
-
 @Entity
 public class StudentCard {
     @Id

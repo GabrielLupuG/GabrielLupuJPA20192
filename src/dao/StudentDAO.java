@@ -5,13 +5,14 @@ import entities.Student;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class StudentDAO {
 
-    protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("unt");
+    protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("linkToMyDb");
 
-    public void persistStudent(Student student){
+    public void persistStudent(Student student) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
@@ -24,31 +25,52 @@ public class StudentDAO {
     public List<Student> getAllStudents() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        List<Student> students = (List<Student>) entityManager.createQuery("Student.findAll").getResultList();
-
-
-        //va trebui sa faci o lista de Student in care sa bagi toti studentii precum ai in metoda din StudentCardDAO
-        //inainte sa iti faci metoda va trebui ca in Student din entities
-        //sa faci un @NamedQuery precum in StudentCard
+        List<Student> students = (List<Student>) entityManager.createNamedQuery("Student.findAll").getResultList();
 
         entityManager.close();
 
         return students;
     }
 
-    public void updateStudent(Student studentToMerge) {
-        //aici va trebui sa dai merge la un obiect de tip Student
-        //pe care il vei trimite din MainActivity.java
+    public void updateStudent(Student student) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
 
+        em.merge(student);
+
+        em.getTransaction().commit();
+        em.close();
 
     }
 
-    public void deleteStudent(Student studentToRemove) {
-        //aici va trebui sa stergi obiectul de tip Student pe care il
-        //vei trimite din MainActivity,java
-        //ATENTIE!
-        //inainte sa dai remove la obiect trebuie sa-i dai merge
-        //vezi exemplele din StudentCardDAO
+    public void deleteStudent(Student student) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        em.remove(em.merge(student));
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void deleteAllStudents() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        em.createNamedQuery("Student.deleteAll").executeUpdate();
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void dropStudentTables() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+
+        Query q = entityManager.createNativeQuery("DROP TABLE student");
+        q.executeUpdate();
+
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
 }

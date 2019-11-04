@@ -6,7 +6,8 @@ import java.util.Set;
 
 
 @NamedQueries({
-        @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s")
+        @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
+        @NamedQuery(name = "Student.deleteAll", query = "delete from Student s "),
 })
 
 @Entity
@@ -23,7 +24,7 @@ public class Student {
     @OneToOne(cascade = CascadeType.REMOVE)
     private StudentCard studentCard;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_module",
             joinColumns = @JoinColumn(name = "student_id"),
@@ -103,13 +104,13 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "\nStudent{" +
                 "id=" + id +
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", studentCard=" + studentCard +
-                ", modules=" + modules +
+                ", " + studentCard +
+//                ", modules=" + modules +
                 '}';
     }
 }

@@ -4,6 +4,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQueries({
+        @NamedQuery(name = "School.getAll", query = "SELECT s FROM School s"),
+        @NamedQuery(name = "School.getById", query = "select s from School s where s.id = :id"),
+})
 
 @Entity
 public class School {
@@ -16,10 +20,16 @@ public class School {
     private String address;
     private String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Module> moduleList = new ArrayList<>();
 
     public School() {
+    }
+
+    public School(String schoolName, String address, String phoneNumber) {
+        this.schoolName = schoolName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public School(String schoolName, String address, String phoneNumber, List<Module> moduleList) {
@@ -75,7 +85,7 @@ public class School {
 
     @Override
     public String toString() {
-        return "School{" +
+        return "\nSchool{" +
                 "id=" + id +
                 ", schoolName='" + schoolName + '\'' +
                 ", address='" + address + '\'' +
