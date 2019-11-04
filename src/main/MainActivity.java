@@ -1,3 +1,5 @@
+//Gabiel Lupu c15712195  DT354/ year 4
+
 package main;
 
 import dao.ModuleDAO;
@@ -30,16 +32,16 @@ public class MainActivity {
                 Set<Module> modules1 = new HashSet<>();
                 modules1.add(module1);
 
-                //creaza lista de studentId cu autoIncrement number
-                //adauga informatiile de mai jos in baza de date. informatile din studentIdDao care face conexiunea cu baza de date
-                StudentCardDAO studentCardDAO = new StudentCardDAO();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+                StudentCardDAO studentCardDAO = new StudentCardDAO();
                 StudentCard myStudentCard = new StudentCard("Lupu", "Gabriel", "BSC InfoSystem", "C11111");
-                StudentCard myStudentCard1 = new StudentCard("Oana", "Lupu", "Bs Business", "C22222");
-                StudentCard myStudentCard2 = new StudentCard("Robert", "Redford", "BSc Accounting", "C333333");
-                StudentCard myStudentCard3 = new StudentCard("Hana", "Montana", "BArch Architecture", "C444444");
-                StudentCard myStudentCard4 = new StudentCard("Bahaa", "Suleimany", "BAeng English", "C2323123");
-                StudentCard myStudentCard5 = new StudentCard("asdadsa", "adsadsada", "asdadasda", "asdadasdasd");
+                StudentCard myStudentCard1 = new StudentCard("Karl", "Mick", "Bs Business", "C22222");
+                StudentCard myStudentCard2 = new StudentCard("Robert", "Redford", "BSc Accounting", "C33333");
+                StudentCard myStudentCard3 = new StudentCard("Hana", "Montana", "BArch Architecture", "C44444");
+                StudentCard myStudentCard4 = new StudentCard("Boby", "Marks", "BAeng English", "C23231");
+                StudentCard myStudentCard5 = new StudentCard("Dany", "Dann", "BLit Literature", "C33322");
 
                 studentCardDAO.persistStudent(myStudentCard);
                 studentCardDAO.persistStudent(myStudentCard1);
@@ -48,24 +50,26 @@ public class MainActivity {
                 studentCardDAO.persistStudent(myStudentCard4);
                 studentCardDAO.persistStudent(myStudentCard5);
 
+                //update Student Card
                 myStudentCard1.setFirstName("Lupu");
                 myStudentCard1.setLastName("Oana");
                 studentCardDAO.updateStudentCard(myStudentCard1);
 
+                //delete Student Card
                 studentCardDAO.deleteStudentCard(myStudentCard5); //
 
                 System.out.println("\n" + studentCardDAO.getAllStudentCards());
 
-                /////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                //creaza tabelul Student si ii ataseaza un card
+                //creating Student table and attached to card
                 StudentDAO studentDAO = new StudentDAO();
-                Student myStudent = new Student("Pacii", "gabriel@mail.com", "11111111", myStudentCard, modules);
-                Student myStudent1 = new Student("Oituz", "Oana@mail.com", "222222222", myStudentCard1, modules);
-                Student myStudent2 = new Student("Bogdanesti", "Robert@mail.com", "3333333333", myStudentCard2, modules1);
-                Student myStudent3 = new Student("Republicii", "Hana@mail.com", "444444444", myStudentCard3, modules1);
-                Student myStudent4 = new Student("Republicii", "Hana@mail.com", "444444444", myStudentCard4, modules1);
-                Student myStudent5 = new Student("Ojtoz", "mikes@mail.com", "555555555", null);
+                Student myStudent = new Student("Watlings st", "gabriel@mail.com", "11111111", myStudentCard, modules);
+                Student myStudent1 = new Student("Bonham st", "Oana@mail.com", "222222222", myStudentCard1, modules);
+                Student myStudent2 = new Student("Island st", "Robert@mail.com", "3333333333", myStudentCard2, modules1);
+                Student myStudent3 = new Student("Liffey st", "Hana@mail.com", "444444444", myStudentCard3, modules1);
+                Student myStudent4 = new Student("Ellis st", "Moana@mail.com", "444444444", myStudentCard4, modules1);
+                Student myStudent5 = new Student("Wood st", "mikes@mail.com", "555555555", null);
 
                 studentDAO.persistStudent(myStudent);
                 studentDAO.persistStudent(myStudent1);
@@ -74,17 +78,20 @@ public class MainActivity {
                 studentDAO.persistStudent(myStudent4);
                 studentDAO.persistStudent(myStudent5);
 
-                //update one of your students
-                //Student myStudentHelper = studentDAO.getOne
-                //studentDAO.updateStudent();
 
-                //sterg al 2 student
+                //update student
+                myStudent1.setAddress("James");
+                myStudent1.setEmail("james@mail.com");
+                myStudent1.setPhoneNumber("012938");
+                studentDAO.updateStudent(myStudent1);
+
+                //delete student
                 studentDAO.deleteStudent(myStudent5);
 
                 System.out.println("\n" + studentDAO.getAllStudents());
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 System.out.println("\n" + moduleDAO.getAllModules());
 
@@ -94,15 +101,16 @@ public class MainActivity {
 
                 SchoolDAO schoolDAO = new SchoolDAO();
                 School school = new School("DIT", "Thomas st", " 123456", modules2);
-                School school1 = new School("DCU", "O'Conell st", "k45678", null);
-                School school2 = new School("DCU", "O'Conell st", "k45678", null);
-                School school3 = new School("DCU", "O'Conell st", "k45678", null);
+                School school1 = new School("UTC", "O'Conell st", "345678", null);
+                School school2 = new School("DCU", "Parnell st", "567890", null);
+                School school3 = new School("TCA", "Kevin st", "789012", null);
 
                 schoolDAO.persistSchool(school);
                 schoolDAO.persistSchool(school1);
                 schoolDAO.persistSchool(school2);
                 schoolDAO.persistSchool(school3);
 
+                //update school
                 School helperSchool = schoolDAO.getById("School.getById", "id", 2);
                 helperSchool.setSchoolName("TUDublin");
                 helperSchool.setAddress("Aungier Street");
@@ -110,11 +118,22 @@ public class MainActivity {
                 schoolDAO.updateStudent(helperSchool);
 
 
+                //delete School
+                schoolDAO.deleteSchool(school3);
                 System.out.println("\n" + schoolDAO.getAllSchools());
 
+
+                //deleting the student table
                 studentDAO.deleteAllStudents();
+                //drop student table
                 studentDAO.dropStudentTables();
 
+                // moduleDAO.deleteAllModule();
+                //drop Moduel table
+                moduleDAO.dropModuleTables();
+                //remove
+                moduleDAO.mergeModule();
+                moduleDAO.removeModule();
         }
 
         public static void main(String[] args) {

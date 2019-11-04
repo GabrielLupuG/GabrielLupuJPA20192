@@ -1,3 +1,4 @@
+//Gabiel Lupu c15712195  DT354/ year 4
 package entities;
 
 import javax.persistence.*;
@@ -6,6 +7,7 @@ import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "Module.getAll", query = "SELECT m FROM Module m")
+
 })
 
 @Entity

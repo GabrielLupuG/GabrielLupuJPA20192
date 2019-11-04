@@ -1,3 +1,6 @@
+//Gabiel Lupu c15712195  DT354/ year 4
+//It should be able to create, merge and remove all objects
+
 package dao;
 
 import entities.StudentCard;
@@ -9,7 +12,7 @@ import java.util.List;
 
 public class StudentCardDAO {
 
-    //creaza conexiune cu persistence.xml
+    // create connection with persistence.xml
     protected static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("linkToMyDb");
 
     public void persistStudent(StudentCard studentCard) {
@@ -22,6 +25,8 @@ public class StudentCardDAO {
         entityManager.close();
     }
 
+
+    //List
     public List<StudentCard> getAllStudentCards() {
         EntityManager em = entityManagerFactory.createEntityManager();
 
@@ -31,6 +36,8 @@ public class StudentCardDAO {
         return studentCards;
     }
 
+
+    //update StudentCard
     public void updateStudentCard(StudentCard studentCard) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -41,6 +48,8 @@ public class StudentCardDAO {
         em.close();
     }
 
+
+    //delete StudentCard
     public void deleteStudentCard(StudentCard studentCard) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -50,6 +59,4 @@ public class StudentCardDAO {
         em.getTransaction().commit();
         em.close();
     }
-
-
 }

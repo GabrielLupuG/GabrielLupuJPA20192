@@ -1,3 +1,6 @@
+//Gabiel Lupu c15712195  DT354/ year 4
+//It should be able to create, merge and remove all objects
+
 package dao;
 
 import entities.Student;
@@ -22,6 +25,8 @@ public class StudentDAO {
         entityManager.close();
     }
 
+
+    //List
     public List<Student> getAllStudents() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
@@ -32,6 +37,8 @@ public class StudentDAO {
         return students;
     }
 
+
+    //update student
     public void updateStudent(Student student) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -43,6 +50,8 @@ public class StudentDAO {
 
     }
 
+
+    //delete student
     public void deleteStudent(Student student) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -53,6 +62,8 @@ public class StudentDAO {
         em.close();
     }
 
+
+    //delete all students
     public void deleteAllStudents() {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -62,6 +73,8 @@ public class StudentDAO {
         em.close();
     }
 
+
+    //drop student table
     public void dropStudentTables() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();

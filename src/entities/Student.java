@@ -1,3 +1,4 @@
+//Gabiel Lupu c15712195  DT354/ year 4
 package entities;
 
 import javax.persistence.*;
